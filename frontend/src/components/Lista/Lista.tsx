@@ -1,19 +1,33 @@
 import { Button } from "@mui/material"
-import { Desricao, Foto, Informacoes, ItemLista, ListaStyled, Nome, Valor } from "./Lista.style"
+import { Professor } from "../../@types/professor"
+import { Desricao, Foto, Informacoes, ItemLista, ListaStyled, ListaVazia, Nome, Valor } from "./Lista.style"
 
-const Lista = () => {
+interface ListaProps {
+    professores: Professor[],
+}
+
+const Lista = (props: ListaProps) => {
     return (
-        <ListaStyled>
-            <ItemLista>
-                <Foto src="https://github.com/andersonprovox.png"></Foto>
-                <Informacoes>
-                    <Nome>Anderson Fonseca</Nome>
-                    <Valor>R$ 120,00 por hora</Valor>
-                    <Desricao>Aulas de Canto e contrabaixo</Desricao>
-                    <Button>Marcar Aula</Button>
-                </Informacoes>
-            </ItemLista>
-        </ListaStyled>
+        <div>
+            {props.professores.length > 0 ? (
+                <ListaStyled>
+                {props.professores.map(professor => (
+                    <ItemLista key={professor.id}>
+                        <Foto src={professor.foto}></Foto>
+                        <Informacoes>
+                            <Nome>{professor.nome}</Nome>
+                            <Valor>{professor.valor_hora.toLocaleString('pt-BR', {minimumFractionDigits: 2, style: 'currency', currency: 'BRL'})} por hora</Valor>
+                            <Desricao>{professor.descricao}</Desricao>
+                            <Button sx={{ width: '70%' }}>Marcar Aula</Button>
+                        </Informacoes>
+                    </ItemLista>
+    
+                ))}
+            </ListaStyled>
+            ) : (
+                <ListaVazia>Nehnum Professor encontrado</ListaVazia>
+            )}
+        </div>
     )
 }
 

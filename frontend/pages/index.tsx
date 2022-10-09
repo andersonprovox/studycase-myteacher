@@ -1,14 +1,25 @@
 import { Box } from '@mui/material'
 import type { NextPage } from 'next'
+import { Professor } from '../src/@types/professor'
 import Lista from '../src/components/Lista/Lista'
 
 
 
 const Home: NextPage = () => {
+  const professores: Professor[] =[
+    {
+      id: 1,
+      nome: "Professor 1",
+      foto: "https://github.com/andersonprovox.png",
+      descricao: "Descricao do professor 1",
+      valor_hora: 199
+    }
+  ]
+
   return (
     <div>
       <Box sx={{backgroundColor: 'secondary.main'}}>
-      <Lista></Lista>
+      <Lista professores={professores}></Lista>
       </Box>
     </div>
   )
