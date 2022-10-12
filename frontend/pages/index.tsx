@@ -2,24 +2,16 @@ import { Box } from '@mui/material'
 import type { NextPage } from 'next'
 import { Professor } from '../src/@types/professor'
 import Lista from '../src/components/Lista/Lista'
+import { useIndex } from '../src/hooks/pages/useIndex'
 
 
 
 const Home: NextPage = () => {
-  const professores: Professor[] =[
-    {
-      id: 1,
-      nome: "Professor 1",
-      foto: "https://github.com/andersonprovox.png",
-      descricao: "Descricao do professor 1",
-      valor_hora: 199
-    }
-  ]
-
+  const { listaProfessores } = useIndex();
   return (
     <div>
       <Box sx={{backgroundColor: 'secondary.main'}}>
-      <Lista professores={professores}></Lista>
+      <Lista professores={ listaProfessores }></Lista>
       </Box>
     </div>
   )
